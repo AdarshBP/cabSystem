@@ -28,9 +28,7 @@ app.use(
 
 app.use(loginRoutes);
 app.use(cabroutes);
-app.get('/ses',(req,res,next) => {    
-    console.log(req.session);
-});
+
 
 app.use((req,res,next) => {    
     console.log("entered 404 error");
