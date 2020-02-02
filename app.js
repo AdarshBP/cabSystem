@@ -2,7 +2,7 @@ const express    = require('express');
 const path       = require('path');
 const bodyParser = require('body-parser');
 const session    = require('express-session');
-const flash = require('express-flash-messages');
+
 
 
 const loginRoutes= require ('./routes/login');
@@ -16,7 +16,7 @@ app.set('port',(process.env.PORT || 8000))
 
 app.use(bodyParser.urlencoded({extend:false}));
 app.use(express.static(path.join(__dirname,'public')));
-app.use(flash())
+
 app.use(
     session({
       secret: 'my secret',

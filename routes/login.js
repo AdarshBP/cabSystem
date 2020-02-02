@@ -4,7 +4,7 @@ const rootdir = require("../util/path");
 const session = require('express-session');
 const Router = express.Router();
 const con =require('../connection');
-const flash = require('express-flash-messages');
+
 
 
 
@@ -22,7 +22,7 @@ Router.get('/',(req,res)=>
             res.redirect('/traveladmin');    
     }
 
-    req.flash('notify', 'This is a test notification.')
+ 
     res.render(path.join(rootdir,'views','login'));
 });
 
