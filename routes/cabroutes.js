@@ -97,23 +97,32 @@ Router.get('/MasterList',auth, (req, res) => {
 });
 
 Router.get('/dailyList',auth, (req, res) => {
+    let leaveEmployeeID = [];
+    let leaveQuery ="Select employeeleavetracker.EMP_ID from employeeleavetracker where curdate() >=LEAVE_START_DATE and curdate() <= LEAVE_END_DATE";
+    con.query(leaveQuery, function (err, result) {
+        if (err) throw err;
+        result.forEach((rowData) => {
+            leaveEmployeeID.push(rowData.EMP_ID)
+        });
+        console.log(leaveEmployeeID);
+    });
+
 
     let query = "SELECT employeetimelocation.S_No,employeetimelocation.EMP_ID,EMP_NAME,START_DATE_TIME,END_DATE,START_LOCATION,REASON,STATUS " +
         "FROM employeetimelocation" +
         " inner join employeemanager on " +
         "employeetimelocation.EMP_ID =employeemanager.EMP_ID " +
-        "and STATUS = 'TA' and curdate() between DATE(START_DATE_TIME) and END_DATE " +
-        "inner join employeeleavetracker on " +
-        "employeetimelocation.EMP_ID <> employeeleavetracker.EMP_ID " +
-        "where curdate() between employeeleavetracker.LEAVE_START_DATE and employeeleavetracker.LEAVE_END_DATE"
-
-
+        "and STATUS = 'TA' and curdate() >=DATE(START_DATE_TIME) and curdate() <= END_DATE " ;
+        
     con.query(query, function (err, result) {
         if (err) throw err;
         let dailyList = [];
         let specialList = [];
         let today = new Date().toDateString();
+        console.log("todays cab"+result);
         result.forEach((rowData) => {
+            if (!leaveEmployeeID.includes(rowData.EMP_ID.toString()))
+            {
             rowData.START_DATE_TIME = rowData.START_DATE_TIME.toISOString().slice(0, 16);
             let endYear = rowData.END_DATE.getFullYear();
             rowData.END_DATE = rowData.END_DATE.toISOString().slice(0, 10);
@@ -121,6 +130,7 @@ Router.get('/dailyList',auth, (req, res) => {
                 dailyList.push(rowData);
             else
                 specialList.push(rowData);
+            }
         });
         let data = {
             dailyList: dailyList,
@@ -130,6 +140,7 @@ Router.get('/dailyList',auth, (req, res) => {
         res.render(path.join(rootdir, 'views', 'dailyList'), {
             data
         });
+   
     });
 });
 //============================manager routes ==============================
@@ -230,7 +241,7 @@ Router.get('/myRequests',auth, (req, res) => {
         " and EMP_ID=" + empid;
     con.query(query, function (err, result) {
         if (err) throw err;
-        //console.log(result);
+        console.log(result);
         let bookingData = [];
         let today = new Date().toDateString();
         result.forEach((rowData) => {
@@ -248,7 +259,6 @@ Router.get('/myRequests',auth, (req, res) => {
             };
             bookingData.push(Sdata);
         });
-        // console.log(bookingData);
         let sessionData = {
             empid: req.session.empid,
             empName: req.session.empName,
@@ -263,7 +273,9 @@ Router.get('/myRequests',auth, (req, res) => {
 
 Router.get('/alterTimings',auth, (req, res) => {
     let empid = req.session.empid;
-    let query = "SELECT * FROM `employeetimelocation` where STATUS != 'A' and EMP_ID=" + empid + " and END_DATE >= curdate() order by `S_No` desc";
+    let query = "SELECT * FROM `employeetimelocation` where STATUS != 'A' and EMP_ID="
+     + empid +
+    " and END_DATE >= curdate() order by `S_No` desc";
     con.query(query, function (err, result) {
         if (err) throw err;
         //console.log(result);
