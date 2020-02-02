@@ -23,7 +23,7 @@ Router.get('/',(req,res)=>
     }
 
  
-    res.render(path.join(rootdir,'views','login'));
+    res.render(path.join(rootdir,'views','login'),{error : ""});
 });
 
 Router.get('/logOut',(req,res)=>
@@ -57,8 +57,8 @@ Router.post('/loginCheck',(req,res)=>
         }else
         {
             console.log(' Please enter the vaild credentials');
-            
-            res.redirect('/');
+            var error = 'Please enter the vaild credentials';
+            res.render(path.join(rootdir,'views','login'),{error});
         }
       });
     
