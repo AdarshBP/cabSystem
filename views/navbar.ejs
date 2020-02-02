@@ -1,0 +1,92 @@
+<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+  
+    <a class="navbar-brand" href="#">Logo</a>
+  
+    <ul class="navbar-nav">
+      <li class="nav-item" >
+          <a class="nav-link ApproveRequests " href="/manager/approval"><i class="fas fa-users"></i></i> Approve Requests</a></li>
+      <li class="nav-item">
+          <a class="nav-link MyRequest" href="/myRequests"><i class="fas fa-address-card"></i> My Request</a></li>
+      <li class="nav-item">
+          <a class="nav-link RequestCab" href="/requestCab"><i class="fas fa-taxi"></i> Request Cab</a></li>
+      <li  class="nav-item">
+          <a class="nav-link Altertimings" href="/alterTimings"><i class="fas fa-pen-fancy"></i> Alter timings</span></a></liclass="nav-item">
+      <li class="nav-item">
+          <a class="nav-link Approvalstatus" href="/approvalStatus"><i class="fas fa-check-double"></i> Approval status</span></a></li>
+      <li class="nav-item">
+          <a class="nav-link LeavesUpdate" href="/leaveScreen"><i class="fas fa-user-minus"></i> Leaves Update</span></a></li>      
+      <li class="nav-item">
+        <a class="nav-link Contact"  href="/contactUs"><i class="fa fa-envelope"></i> Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link ReportBug" href="/reportBug"><i class="fas fa-bug"></i> Report Bug</a>
+      </li>
+      
+      <li class="nav-item dropdown navbar-right">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          <i class="fas fa-user-circle"></i> Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="/profile">Profile</a>
+           <a class="dropdown-item" href="/logOut">LogOut</a>
+           <a class="dropdown-item" href="/resetPassword">ResetPassword</a>
+        </div>
+        <li class="nav-item navbar-right"  >
+          <a class="nav-link"></i> Welcome User</a>
+        </li>
+      </li>
+    </ul>
+  </nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Logo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <% if(sessionData.empRole == 'M'){ %>
+      <li class="nav-item">
+        <a class="nav-link ApproveRequests " href="/manager/approval"><i class="fas fa-users"></i></i> Approve
+          Requests</a></li>
+      <%}%>
+      <li class="nav-item">
+        <a class="nav-link MyRequest" href="/myRequests"><i class="fas fa-address-card"></i> Cab Pass</a></li>
+      <li class="nav-item">
+        <a class="nav-link RequestCab" href="/requestCab"><i class="fas fa-taxi"></i> Request Cab</a></li>
+      <li class="nav-item">
+        <a class="nav-link Altertimings" href="/alterTimings"><i class="fas fa-pen-fancy"></i> Alter
+          timings</span></a></liclass="nav-item">
+      <li class="nav-item">
+        <a class="nav-link Approvalstatus" href="/approvalStatus"><i class="fas fa-check-double"></i> Approval
+          status</span></a></li>
+      <li class="nav-item">
+        <a class="nav-link LeavesUpdate" href="/leaveScreen"><i class="fas fa-user-minus"></i> Leaves
+          Update</span></a></li>
+      <li class="nav-item">
+        <a class="nav-link Contact" href="/contactUs"><i class="fa fa-envelope"></i> Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link ReportBug" href="/reportBug"><i class="fas fa-bug"></i> Report Bug</a>
+      </li>
+      <!-- Dropdown -->
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          <i class="fas fa-user-circle"></i> Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/profile">Profile</a>
+          <a class="dropdown-item" href="/logOut">LogOut</a>
+          <a class="dropdown-item" href="/resetPassword">ResetPassword</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+    <li class="nav-item  ">
+      <a class="nav-link active side-nav" ></i> Welcome <%= sessionData.empName %></a>
+    </li>
+  </ul>
+  </div>
+</nav>

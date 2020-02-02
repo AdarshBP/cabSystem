@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Welcome User</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+
+  <!-- <script src="https://kit.fontawesome.com/ef474bc0cc.js" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function(){   
+      $('.MyRequest').addClass("active");
+    }); 
+  </script>
+</head>
+<body>
+  <%- include('navbar.ejs') %>
+
+<br>
+
+<div class="container table-responsive">
+    <table class="table table-hover">
+        <thead class="table-primary">
+        <tr> 
+            <th>Cab ID</th>
+            <th>Bording date</th>
+            <th>Bording time</th>
+            <th>Bording point</th>
+            <th>Debording point</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <% bookingData.forEach((item)=>{ %>  
+            <tr>
+              <td><%=item.Sno %></td>
+               <td><%=item.Sdate %></td>
+               <td><%=item.Stime %></td>
+               <td><%=item.Slocation %></td> 
+               <td ><%=item.Elocation %> </td>  
+            </tr> <%});%> 
+    </tbody> 
+
+</body>
+</html>

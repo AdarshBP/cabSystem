@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Welocome Manager</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <script src="https://kit.fontawesome.com/ef474bc0cc.js" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function(){   
+      $('.ApproveRequests').addClass("active");
+    }); 
+  </script>
+
+</head>
+<body>
+  <%- include('navbar.ejs') %>
+
+<br>
+  
+  <div class="container table-responsive">
+    <table class="table table-hover">
+        <thead class="table-primary">
+        <tr>
+            <th>EMP ID</th>
+            <th>EMP NAME</th>
+            <th>START_DATE</th>
+            <th>END_DATE</th>
+            <th>LOCATION</th>
+            <th>REASON</th>
+            <th>APPROVE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.pending_data.forEach((item)=>{ %>  
+            <tr>
+               <td><%= item.EMP_ID %></td>
+               <td><%= item.EMP_NAME %></td>
+               <td><%= item.START_DATE_TIME %></td> 
+               <td ><%= item.END_DATE %> </td> 
+               <td><%= item.START_LOCATION %></td> 
+               <td><%= item.REASON %></td> 
+               <td>
+                  <form action='/manger/user-approve' method="POST">
+                    <button class="btn btn-success" type="submit">APPROVE</button>
+                    <input type="hidden" value="<%=item.EMP_ID%>" name="userid">
+                  </form>
+                    <form action='/manger/user-disapprove' method="POST">
+                    <button class="btn btn-danger" type="submit">DECLINE</button>
+                    <input type="hidden" value="<%=item.EMP_ID%>" name="userid">
+                  </form>
+                </td> 
+            </tr>    
+        <%});%>  
+      </tbody>         
+    </table>
+  </div>
+
+  <div class="container table-responsive">
+    <table class="table table-hover ">
+        <thead class="table-success">
+        <tr>
+            <th>EMP ID</th>
+            <th>EMP NAME</th>
+            <th>START_DATE</th>
+            <th>END_DATE</th>
+            <th>LOCATION</th>
+            <th>REASON</th>
+            <th>APPROVE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.mangerApproved_data.forEach((item)=>{ %>  
+            <tr>
+               <td><%= item.EMP_ID %></td>
+               <td><%= item.EMP_NAME %></td>
+               <td><%= item.START_DATE_TIME %></td> 
+               <td><%= item.END_DATE %></td> 
+               <td><%= item.START_LOCATION %></td> 
+               <td><%= item.REASON %></td> 
+               <td>
+                    <button class="btn btn-success">APPROVED</button>
+               </td> 
+            </tr>    
+        <%});%>  
+      </tbody>         
+    </table>
+  </div>
+
+  <div class="container table-responsive">
+    <table class="table table-hover ">
+        <thead class="table-danger">
+        <tr>
+            <th>EMP ID</th>
+            <th>EMP NAME</th>
+            <th>START_DATE</th>
+            <th>END_DATE</th>
+            <th>LOCATION</th>
+            <th>REASON</th>
+            <th>APPROVE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.mangerDisapproved_data.forEach((item)=>{ %>  
+            <tr>
+               <td><%= item.EMP_ID %></td>
+               <td><%= item.EMP_NAME %></td>
+               <td><%= item.START_DATE_TIME %></td> 
+               <td><%= item.END_DATE.substring %></td> 
+               <td><%= item.START_LOCATION %></td> 
+               <td><%= item.REASON %></td> 
+               <td>
+                  <form action='/manger/user-approve' method="POST">
+                    <button class="btn btn-warning" type="submit">APPROVE</button>
+                    <input type="hidden" value="<%=item.EMP_ID%>" name="userid">
+                  </form>
+               </td> 
+            </tr>    
+        <%});%>  
+      </tbody>         
+    </table>
+  </div>
+
+</body>
+</html>

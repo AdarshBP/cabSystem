@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Welcome User</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function(){   
+      $('.Approvalstatus').addClass("active");
+    }); 
+  </script>
+</head>
+<body>
+    <%- include('navbar.ejs') %>
+
+<!------------------------------------ Contents of the booked table ------------------------------------>
+<div class="">
+    <table class="table  table-hover container-xl ">
+        <thead>
+        <tr> 
+            <th>CabId</th>
+            <th>Bording date</th>
+            <th>Bording time</th>
+            <th>Bording point</th>
+            <th>Debording point</th>
+            <th>Vaild Till</th>
+            <th>landmark</th>
+            <th>Reason</th>   
+            <th>STATUS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% bookedData.forEach((item)=>{ %>  
+            <tr>
+                <td class= "Cabid"><%= item.Sno %></td>
+                <td class= "Sdate"><%= item.Sdate %></td>
+                <td class= "Stime"><%= item.Stime %></td>
+                <td class= "Slocation"><%= item.Slocation %></td> 
+                <td class= "Elocation"><%= item.Elocation %></td>
+                <td class= "Edate"><%= item.Edate %></td>
+                <td class= "landmark"><%= item.landmark %></td> 
+                <td class= "Reason"><%= item.Reason %></td>  
+                <td class= "Reason"><%= item.status %></td>           
+            </tr>
+
+   <%});%> 
+    </tbody> 
+    
+</body>
+</html>
