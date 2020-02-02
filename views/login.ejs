@@ -18,12 +18,11 @@
     </div> -->
 
     <!-- Login Form -->
-
-    <% if (typeof deletePostSuccessMsg != 'undefined' && deletePostSuccessMsg) { %>
-      <div class="alert alert-success"><%- deletePostSuccessMsg %></div>
-      <% } else if(typeof deletePostErrorMsg != 'undefined' && deletePostErrorMsg) { %>
-      <div class="alert alert-danger"><%- deletePostErrorMsg %></div>
-      <% } %>
+    <% if (error != ""){%> 
+      <div class="alert alert-danger" role="alert">
+        Please enter the vaild credentials
+      </div>
+      <%}%>
     <form class="form form--login framed" method="POST" action='/loginCheck'>
       <input type="text" id="UserID" class="fadeIn second" name="UserID" placeholder="UserID">
       <input type="text" id="password" class="fadeIn third" name="Password" placeholder="password">
