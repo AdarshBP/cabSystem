@@ -16,7 +16,7 @@ var config = {
     },
     production: {
         //url to be used in link generation
-        url: 'http://my.site.com',
+        url: 'https://attracab.herokuapp.com/',
         //mongodb connection settings
         database: {
             host: 'sql2.freesqldatabase.com',

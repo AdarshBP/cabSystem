@@ -44,7 +44,7 @@ Router.get('/traveladmin',auth, (req, res) => {
 });
 
 Router.post('/admin/user-cab-approve',auth, (req, res) => {
-    let query = "UPDATE `attra_cab`.`employeetimelocation` SET `STATUS`= 'TA' WHERE `S_No` =" + req.body.SNo;
+    let query = "UPDATE `employeetimelocation` SET `STATUS`= 'TA' WHERE `S_No` =" + req.body.SNo;
     con.query(query, function (err, result) {
         if (err) throw err;
         //console.log(result);
@@ -53,7 +53,7 @@ Router.post('/admin/user-cab-approve',auth, (req, res) => {
 });
 
 Router.post('/admin/user-cab-disapprove',auth, (req, res) => {
-    let query = "UPDATE `attra_cab`.`employeetimelocation` SET `STATUS`= 'TD' WHERE `S_No` =" + req.body.SNo;
+    let query = "UPDATE `employeetimelocation` SET `STATUS`= 'TD' WHERE `S_No` =" + req.body.SNo;
     con.query(query, function (err, result) {
         if (err) throw err;
         //console.log(result);
@@ -174,7 +174,7 @@ Router.get('/manager/approval',auth, (req, res) => {
 
 Router.post('/manger/user-approve',auth, (req, res) => {
     console.log()
-    let query = "UPDATE `attra_cab`.`employeetimelocation` SET `STATUS`= 'MA' WHERE `S_No` =" + req.body.SNo;
+    let query = "UPDATE `employeetimelocation` SET `STATUS`= 'MA' WHERE `S_No` =" + req.body.SNo;
     con.query(query, function (err, result) {
         if (err) console.log(err);
         //console.log(result);
@@ -185,7 +185,7 @@ Router.post('/manger/user-approve',auth, (req, res) => {
 });
 
 Router.post('/manger/user-disapprove',auth, (req, res) => {
-    let query = "UPDATE `attra_cab`.`employeetimelocation` SET `STATUS`= 'D' WHERE `S_No` =" + req.body.SNo;
+    let query = "UPDATE `employeetimelocation` SET `STATUS`= 'D' WHERE `S_No` =" + req.body.SNo;
     con.query(query, function (err, result) {
         if (err) console.log(err);
         res.redirect('/manager/approval');
@@ -207,7 +207,7 @@ Router.get('/requestCab',auth, (req, res) => {
 
 Router.post('/cabRequested',auth, (req, res) => {
     console.log("cab requested " + req.body);
-    let query = " INSERT INTO `attra_cab`.`employeetimelocation` (`EMP_ID`,`START_DATE_TIME`,`END_DATE`,`START_LOCATION`,`END_LOCATION`,`LANDMARK`,`REASON`) VALUES (?,?,?,?,?,?,?)";
+    let query = " INSERT INTO `employeetimelocation` (`EMP_ID`,`START_DATE_TIME`,`END_DATE`,`START_LOCATION`,`END_LOCATION`,`LANDMARK`,`REASON`) VALUES (?,?,?,?,?,?,?)";
     let sqldata = req.body;
     let values = [sqldata.empid, sqldata.startDateTime, sqldata.endDate, sqldata.startAddress, sqldata.endAddress, sqldata.landmark, sqldata.reason];
     con.query(query, values, function (err, result) {
@@ -225,7 +225,7 @@ Router.post('/cabRequested',auth, (req, res) => {
 Router.get('/myRequests',auth, (req, res) => {
     let empid = req.session.empid;
     let query = "SELECT `S_No`,`EMP_ID`,`START_DATE_TIME`,`END_DATE`,`START_LOCATION`,`END_LOCATION` " +
-        "FROM `attra_cab`.`employeetimelocation` " +
+        "FROM `employeetimelocation` " +
         "where STATUS='TA' and END_DATE >= curdate()" +
         " and EMP_ID=" + empid;
     con.query(query, function (err, result) {
@@ -263,7 +263,7 @@ Router.get('/myRequests',auth, (req, res) => {
 
 Router.get('/alterTimings',auth, (req, res) => {
     let empid = req.session.empid;
-    let query = "SELECT * FROM `attra_cab`.`employeetimelocation` where STATUS != 'A' and EMP_ID=" + empid + " and END_DATE >= curdate() order by `S_No` desc";
+    let query = "SELECT * FROM `employeetimelocation` where STATUS != 'A' and EMP_ID=" + empid + " and END_DATE >= curdate() order by `S_No` desc";
     con.query(query, function (err, result) {
         if (err) throw err;
         //console.log(result);
@@ -306,7 +306,7 @@ Router.get('/alterTimings',auth, (req, res) => {
 });
 
 Router.post('/alterDetails',auth, (req, res) => {
-    let query = "UPDATE `attra_cab`.`employeetimelocation` " +
+    let query = "UPDATE `employeetimelocation` " +
         "SET `START_DATE_TIME`= ?," +
         "`END_DATE` = ?," +
         "`START_LOCATION` = ?," +
@@ -326,7 +326,7 @@ Router.post('/alterDetails',auth, (req, res) => {
 
 Router.get('/approvalStatus',auth, (req, res) => {
     let empid = req.session.empid;
-    let query = "SELECT * FROM `attra_cab`.`employeetimelocation` where STATUS <> 'X' and EMP_ID=" + empid;
+    let query = "SELECT * FROM `employeetimelocation` where STATUS <> 'X' and EMP_ID=" + empid;
     con.query(query, function (err, result) {
         if (err) throw err;
         //console.log(result);
@@ -377,7 +377,7 @@ Router.get('/leaveScreen',auth, (req, res) => {
 });
 
 Router.post('/updateLeave',auth, (req, res) => {
-    let query = "INSERT INTO `attra_cab`.`employeeleavetracker`(`EMP_ID`,`LEAVE_START_DATE`,`LEAVE_END_DATE`) VALUES (?,?,?)";
+    let query = "INSERT INTO `employeeleavetracker`(`EMP_ID`,`LEAVE_START_DATE`,`LEAVE_END_DATE`) VALUES (?,?,?)";
     let sqldata = req.body;
     let values = [sqldata.empid, sqldata.StartDate, sqldata.EndDate];
     con.query(query, values, function (err, result) {
@@ -398,7 +398,7 @@ Router.get('/test', (req, res) => {
 
 Router.get('/old_xalterTimings', (req, res) => {
     let empid = req.session.empid;
-    let query = "SELECT * FROM `attra_cab`.`employeetimelocation` where STATUS != 'A' and EMP_ID=" + empid + " and END_DATE >= curdate() order by `S_No` desc";
+    let query = "SELECT * FROM `employeetimelocation` where STATUS != 'A' and EMP_ID=" + empid + " and END_DATE >= curdate() order by `S_No` desc";
     con.query(query, function (err, result) {
         if (err) throw err;
         //console.log(result);
