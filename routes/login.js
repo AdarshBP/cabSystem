@@ -32,7 +32,6 @@ Router.get('/logOut',(req,res)=>
     res.redirect('/');
 });
 
-
 Router.post('/loginCheck',(req,res)=>
 {
     console.log('fresh session is being established ');
