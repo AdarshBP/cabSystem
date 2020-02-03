@@ -37,8 +37,14 @@ Router.get('/traveladmin',auth, (req, res) => {
             TravelmangerDisapproved_data: TravelmangerDisapproved_data
         };
         //console.log(data);
+        let sessionData = {
+            empid: req.session.empid,
+            empName: req.session.empName,
+            empRole: req.session.role
+        }
         res.render(path.join(rootdir, 'views', 'adminApproval'), {
-            data
+            data,
+            sessionData
         });
     });
 });
@@ -89,9 +95,15 @@ Router.get('/MasterList',auth, (req, res) => {
             dailyList: dailyList,
             specialList: specialList
         }
+        let sessionData = {
+            empid: req.session.empid,
+            empName: req.session.empName,
+            empRole: req.session.role
+        }
         console.log(data);
         res.render(path.join(rootdir, 'views', 'masterList'), {
-            data
+            data,
+            sessionData
         });
     });
 });
@@ -136,9 +148,15 @@ Router.get('/dailyList',auth, (req, res) => {
             dailyList: dailyList,
             specialList: specialList
         }
-        console.log(data);
+        //console.log(data);
+        let sessionData = {
+            empid: req.session.empid,
+            empName: req.session.empName,
+            empRole: req.session.role
+        }
         res.render(path.join(rootdir, 'views', 'dailyList'), {
-            data
+            data,
+            sessionData
         });
    
     });
