@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Welcome Admin</title>
+  <title>Welcome <%= sessionData.empName %></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+    integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="jquery.tableToExcel.js"></script>
+  <script src="jquery.table2excel.js"></script>
   <script>
-    function writeDataToExcel(){
-      $('.tableData').tblToExcel();
-      }
-      $(document).ready(function(){   
+    function writeDataToExcel() {
+     // $('.tableData').tblToExcel();
+
+
+      $(".tableData").table2excel({
+        exclude: ".noExl",
+        name: "DailyList",
+        filename: "DailyList", //do not include extension
+        fileext: ".xlsm", // file extension
+        preserveColors:true
+
+      });
+
+    }
+    $(document).ready(function () {
       $('.dailyList').addClass("active");
-    }); 
+    });
   </script>
 
 </head>
+
 <body>
-  <%- include('adminNavBar.ejs') %>  
-<br>
+  <%- include('adminNavBar.ejs') %>
+  <br>
 
   <div class="container table-responsive ">
-    <button onclick="writeDataToExcel();" class="btn btn-primary" >Export to Excel </button>
+    <button onclick="writeDataToExcel();" class="btn btn-primary">Export to Excel </button>
     <div class="tableData">
-    <table class="table table-hover mytable">
-      <thead class="thead-dark">
-        <tr>
-          <th colspan="7" style="text-align:center;">Special Pass</th>
-      </tr>
-      </thead>
-        <thead class="thead-dark ">           
-        <tr>
+      <table class="table table-hover mytable">
+        <thead class="thead-dark">
+          <tr>
+            <th colspan="7" style="text-align:center;">Special Pass</th>
+          </tr>
+        </thead>
+        <thead class="thead-dark ">
+          <tr>
             <th>Cab ID</th>
             <th>EMP ID</th>
             <th>EMP NAME</th>
@@ -44,31 +59,31 @@
             <th>END_DATE</th>
             <th>LOCATION</th>
             <th>REASON</th>
-        </tr>
+          </tr>
         </thead>
-    <tbody>
-        <% data.specialList.forEach((item)=>{ %>  
-            <tr>
-               <td><%= item.S_No %></td>
-               <td><%= item.EMP_ID %></td>
-               <td><%= item.EMP_NAME %></td>
-               <td><%= item.START_DATE_TIME %></td> 
-               <td ><%= item.END_DATE %> </td> 
-               <td><%= item.START_LOCATION %></td> 
-               <td><%= item.REASON %></td> 
-            </tr>    
-        <%});%>  
-       </tbody>         
-    </table>
-  <!-- </div>
+        <tbody>
+          <% data.specialList.forEach((item)=>{ %>
+          <tr>
+            <td><%= item.S_No %></td>
+            <td><%= item.EMP_ID %></td>
+            <td><%= item.EMP_NAME %></td>
+            <td><%= item.START_DATE_TIME %></td>
+            <td><%= item.END_DATE %> </td>
+            <td><%= item.START_LOCATION %></td>
+            <td><%= item.REASON %></td>
+          </tr>
+          <%});%>
+        </tbody>
+      </table>
+      <!-- </div>
 
   <div class="container table-responsive"> -->
-    <table class="table table-hover"> 
+      <table class="table table-hover">
         <thead class="thead-dark">
-            <tr>
-                <th colspan="7" style="text-align:center;">Daily Pass</th>
-            </tr>    
-        <tr>
+          <tr>
+            <th colspan="7" style="text-align:center;">Daily Pass</th>
+          </tr>
+          <tr>
             <th>Cab ID</th>
             <th>EMP ID</th>
             <th>EMP NAME</th>
@@ -76,24 +91,25 @@
             <th>END_DATE</th>
             <th>LOCATION</th>
             <th>REASON</th>
-        </tr>
+          </tr>
         </thead>
-    <tbody>
-        <% data.dailyList.forEach((item)=>{ %>  
-            <tr>
-               <td><%= item.S_No %></td>
-               <td><%= item.EMP_ID %></td>
-               <td><%= item.EMP_NAME %></td>
-               <td><%= item.START_DATE_TIME %></td> 
-               <td ><%= item.END_DATE %> </td> 
-               <td><%= item.START_LOCATION %></td> 
-               <td><%= item.REASON %></td> 
-            </tr>    
-        <%});%>  
-      </tbody>         
-    </table>
+        <tbody>
+          <% data.dailyList.forEach((item)=>{ %>
+          <tr>
+            <td><%= item.S_No %></td>
+            <td><%= item.EMP_ID %></td>
+            <td><%= item.EMP_NAME %></td>
+            <td><%= item.START_DATE_TIME %></td>
+            <td><%= item.END_DATE %> </td>
+            <td><%= item.START_LOCATION %></td>
+            <td><%= item.REASON %></td>
+          </tr>
+          <%});%>
+        </tbody>
+      </table>
     </div>
   </div>
 
 </body>
+
 </html>
